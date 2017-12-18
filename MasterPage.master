@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Traffiter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link href="font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js" ></script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        .floatingfooter {
+            background: #f5d1d1;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 50px;
+        }
+        .innerfooter {
+            width:25%;
+            text-align:center;
+            color:#808080;
+            float:left;
+            font-size:15px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="container-fluid" style ="background-image:url(/images/frontend-large.jpg);min-height:700px;">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <div style="height:80px"></div>
+    </div>
+
+    <div class="floatingfooter">
+        <div class ="innerfooter"><a href = "RecentlyList.aspx"><span class="oi oi-magnifying-glass"></span><br /><%=(string)GetLocalResourceObject("Recent")%></a></div>
+        <div class ="innerfooter"><span class="oi oi-heart"></span><br /><%=(string)GetLocalResourceObject("Favorite")%></div>
+        <div class ="innerfooter"><span class="oi oi-list"></span><br /><%=(string)GetLocalResourceObject("Plan")%></div>
+        <div class ="innerfooter"><a href = "Login.aspx"><span class="oi oi-person"></span><br /><%=(string)GetLocalResourceObject("Account")%></a></div>
+    </div>
+    </form>
+
+
+    
+ 
+<%--		<script src="Scripts/masonry.pkgd.min.js"></script>
+		<script src="Scripts/imagesloaded.js"></script>
+		<script src="Scripts/classie.js"></script>
+		<script src="Scripts/AnimOnScroll.js"></script>--%>
+<%--		<script>
+		    new AnimOnScroll(document.getElementById('grid'), {
+		        minDuration: 0.4,
+		        maxDuration: 0.7,
+		        viewportFactor: 0.2
+		    });
+		</script>--%>
+
+</body>
+</html>
