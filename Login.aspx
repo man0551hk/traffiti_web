@@ -26,11 +26,13 @@
            <br />
            <h3><%=(string)GetLocalResourceObject("Login")%></h3>
             <br />
-            <asp:TextBox runat="server" ID="login" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="loginName" CssClass="form-control"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID ="loginNameRF" ControlToValidate ="loginName" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
             <br />
             <asp:TextBox runat="server" ID="password" Textmode="Password" CssClass="form-control"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID ="passwordRF" ControlToValidate ="password" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
             <br />
-            <asp:Button runat="server" ID="loginBtn" CssClass="btn btn-primary" Width ="200"/>
+            <asp:Button runat="server" ID="loginBtn" CssClass="btn btn-primary" Width ="200" OnClick ="loginBtn_Click"/>
             <br />
             <a href ="forgotPassword.aspx" style ="color:#fff;"><h4><%=(string)GetLocalResourceObject("ForgetPassword")%></h4></a>
             <br />

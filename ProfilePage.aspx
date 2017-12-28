@@ -21,19 +21,19 @@
             </div>
             <div class ="row" style="padding-top:10px">
                 <div class ="col" style="text-align:left">
-                    <img src="https://s3-ap-southeast-1.amazonaws.com/traffiti/client_profile/profile1.png" class="rounded-circle" alt="profile_pic" width="100">
+                    <img src="<%=author.profile_pic %>" class="rounded-circle" alt="profile_pic" width="100">
                     <br />
-                    <font style ="font-size:24px;color:#fff">Vivian Chan</font>
+                    <font style ="font-size:24px;color:#fff"><%=author.author_name %></font>
                 </div>
                 <div class ="col" style="text-align:right;vertical-align:bottom">
                     <div class ="row">
                         <div class ="col" style ="font-size:20px;color:#fff">
-                            100
+                            <%=author.fans %>
                             <br />
                             Fans
                         </div>
                         <div class ="col" style ="font-size:20px;color:#fff">
-                            100
+                            <%=author.follows %>
                             <br />
                             Follow
                         </div>
