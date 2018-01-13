@@ -10,6 +10,7 @@ public class WallDetail
 {
     public List<string> contentList { set; get; }
     public List<string> photoList { set; get; }
+    public string photos { set; get; }
     public int wall_id { set; get; }
     public string location { set; get; }
     public int author_id { set; get; }

@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <style>
         .headerCover {
-            background-image:url(https://s3-ap-southeast-1.amazonaws.com/traffiti/client_upload/tokyo.jpg);
+            background-image:url(<%=author.cover_pic %>);
             background-position: center center;<a href="font/">font/</a>
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -30,18 +30,18 @@
                         <div class ="col" style ="font-size:20px;color:#fff">
                             <%=author.fans %>
                             <br />
-                            Fans
+                            <%=(string)GetLocalResourceObject("fans")%>
                         </div>
                         <div class ="col" style ="font-size:20px;color:#fff">
                             <%=author.follows %>
                             <br />
-                            Follow
+                            <%=(string)GetLocalResourceObject("follows")%>
                         </div>
                     </div>
                     <div class ="row">
                         <div class ="col" style="text-align:right;">
                             <br /><br />
-                            <a href ="editProfile.aspx" class ="rounded" style ="font-size:20px;color:#fff;border:1px solid #fff;padding:3px;">Edit Profile</a>
+                            <a href ="editProfile.aspx" class ="rounded" style ="text-decoration:none;font-size:20px;color:#fff;border:1px solid #fff;padding:3px;"><%=(string)GetLocalResourceObject("editProfile")%></a>
                         </div>
                     </div>
                 </div>
@@ -54,46 +54,49 @@
         <div class="col" style ="border:1px solid gray;text-align:center;padding-top:10px;">
             <span class="oi oi-heart"></span>
             <br />
-            Favorite
+            <%=(string)GetLocalResourceObject("favorite")%>
         </div>
         <div class="col" style ="border:1px solid gray;text-align:center;padding-top:10px;">
             <span class="oi oi-list"></span>
             <br />
-            My Plan
+            <%=(string)GetLocalResourceObject("myplan")%>
         </div>
         <div class="col" style ="border:1px solid gray;text-align:center;padding-top:10px;">
             <span class="oi oi-calendar"></span>
             <br />
-            Calendar
+            <%=(string)GetLocalResourceObject("calendar")%>
         </div>
     </div>
 
+    <asp:Repeater runat="server" ID ="wallRepeater">
+        <ItemTemplate>
             <div class ="row" style="color:#fff;padding:5px;background-color: rgba(23, 32, 42, 0.8);">
                 <div class ="col">
                     <div class ="row">
                         <div class="col">
-                           Tokyo
+                            <%# DataBinder.Eval(Container.DataItem, "location") %>
                             <br />
-                            2017-01-01
+                            <%# DataBinder.Eval(Container.DataItem, "date_text") %>
                         </div>
                     </div>
                     <div class ="row" style="padding-top:5px;">
-                        <div class="col">
-                            <img src="https://s3-ap-southeast-1.amazonaws.com/traffiti/client_upload/tokyo.jpg" class="img-fluid" alt="wall_item_cover">
-                        </div>
-                        <div class="col">
-                            <img src="https://s3-ap-southeast-1.amazonaws.com/traffiti/client_upload/tokyo2.jpg" class="img-fluid" alt="wall_item_cover">
-                        </div>
+                        
+                            <%# DataBinder.Eval(Container.DataItem, "photos") %>
+                
                     </div>
                     <div class ="row" style="padding-top:5px;padding-bottom:5px;">
                         <div class ="col-md-12">
-                            <span class="oi oi-thumb-up"></span> 6
+                            <span class="oi oi-thumb-up"></span> <%# DataBinder.Eval(Container.DataItem, "fav_count") %>
                             &nbsp;
-                            <span class="oi oi-heart"></span> 4
+                            <span class="oi oi-heart"></span> <%# DataBinder.Eval(Container.DataItem, "like_count") %>
                         </div>
                     </div>
                 </div>
             </div>
+        </ItemTemplate>
+    </asp:Repeater>
+
+
 
 </asp:Content>
 

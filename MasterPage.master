@@ -14,6 +14,9 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
+        body {
+            font-family:Arial;
+        }
         .floatingfooter {
             background: #f5d1d1;
             position: fixed;
@@ -21,6 +24,7 @@
             right: 0;
             bottom: 0;
             height: 50px;
+            z-index:1000;
         }
         .innerfooter {
             width:25%;
