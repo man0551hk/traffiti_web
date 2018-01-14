@@ -9,15 +9,30 @@
     </div>
 </div>
 <div class ="row" style ="padding-top:10px; background-color:#fff">
-    <div class="col" style="padding-left:5px;"><h5>Account</h5></div>
+    <div class="col" style="padding-left:5px;"><h5><asp:Literal runat="server" ID="accountLabel"></asp:Literal></h5></div>
 
 </div>
-<div class="row" style="border-bottom:2px solid #f8eded;background-color:#fff">
+<div class="row" style="border-bottom:2px solid #f8eded;background-color:#fff;padding-bottom:5px;">
     <div class="col">
-        <img src="<%=author.profile_pic %>" class="rounded-circle" alt="profile_pic" width="100" />
+        <img src="<%=author.profile_pic %>" class="rounded-circle" alt="profile_pic" width="50" />
     </div>
     <div class="col">
-        <font style ="font-size:24px;color:#000"><%=author.author_name %></font>
+        <font style ="font-size:12px;color:#000"><%=author.author_name %></font><br />
+        <font style ="font-size:12px;color:#000"><%=author.email %></font><br />
+    </div>
+    <div class="col">
+        <asp:Button runat="server" ID="logoutBtn" Text="logout" CssClass="btn btn-danger"  OnClick="logoutBtn_Click"/>
+    </div>
+</div>
+
+<div class="row" style="border-bottom:2px solid #f8eded;background-color:#fff;padding-top:5px;padding-bottom:5px;">
+    <div class="col">
+        <asp:Literal runat="server" ID="presetLangLabel"></asp:Literal>
+    </div>
+    <div class="col">
+        <asp:DropDownList runat="server" ID ="presetLang" CssClass="form-control" OnSelectedIndexChanged="presetLang_SelectedIndexChanged" AutoPostBack="true">
+        </asp:DropDownList>
+       
     </div>
 </div>
 

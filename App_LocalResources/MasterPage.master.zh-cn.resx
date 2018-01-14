@@ -120,6 +120,9 @@
   <data name="Account" xml:space="preserve">
     <value>帐户</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>新增旅图</value>
+  </data>
   <data name="Favorite" xml:space="preserve">
     <value>我的最爱</value>
   </data>

@@ -27,11 +27,12 @@
             z-index:1000;
         }
         .innerfooter {
-            width:25%;
+            width:20%;
             text-align:center;
             color:#808080;
             float:left;
             font-size:15px;
+            padding-top:2px;
         }
     </style>
 </head>
@@ -47,6 +48,7 @@
     <div class="floatingfooter">
         <div class ="innerfooter"><a href = "RecentlyList.aspx"><span class="oi oi-magnifying-glass"></span><br /><%=(string)GetLocalResourceObject("Recent")%></a></div>
         <div class ="innerfooter"><span class="oi oi-heart"></span><br /><%=(string)GetLocalResourceObject("Favorite")%></div>
+        <div class ="innerfooter"><a href = "AddTraffiti.aspx"><span class="oi oi-plus"></span><br /><%=(string)GetLocalResourceObject("Add")%></a></div>
         <div class ="innerfooter"><span class="oi oi-list"></span><br /><%=(string)GetLocalResourceObject("Plan")%></div>
         <div class ="innerfooter"><a href = "Login.aspx"><span class="oi oi-person"></span><br /><%=(string)GetLocalResourceObject("Account")%></a></div>
     </div>

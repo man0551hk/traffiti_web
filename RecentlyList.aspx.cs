@@ -21,7 +21,12 @@ public partial class RecentlyList : System.Web.UI.Page
     {
         ApiClass apiClass = new ApiClass();
         string url = "http://api.traffiti.co/api/Wall/GetWall";
-        string json = "{'pageNum': 1, 'lang_id': 1}";
+        string lang = "2"; //default lang
+        if (Request.Cookies["PresetLang"] != null)
+        {
+            lang = Request.Cookies["PresetLang"].Value;
+        }
+        string json = "{'pageNum': 1, 'lang_id': " + lang + "}";
         string result = apiClass.PostCallApi(url, json);
         JavaScriptSerializer js = new JavaScriptSerializer();
         List<Wall> wallList = js.Deserialize <List<Wall>>(result);
