@@ -38,7 +38,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="container-fluid" style ="background-image:url(/images/frontend-large.jpg);min-height:700px;">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+    <div class="container-fluid" style ="background-image:url(images/frontend-large.jpg);min-height:700px;">
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>

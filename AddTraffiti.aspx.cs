@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
@@ -18,6 +19,10 @@ public partial class AddTraffiti : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["author_id"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
         if (IsPostBack && imagesUploader.PostedFile != null)
         {
             uploadTemp();
@@ -77,7 +82,7 @@ public partial class AddTraffiti : System.Web.UI.Page
     public void ShowCurrentTemp()
     {
         ApiClass apiClass = new ApiClass();
-        string url = "http://localhost:57682/api/Wall/GetTempPhoto";
+        string url = "http://api.traffiti.co/api/Wall/GetTempPhoto";
         string json = "{'authorID': " + Session["author_id"] + "}";
         string result = apiClass.PostCallApi(url, json);
         JavaScriptSerializer js = new JavaScriptSerializer();
@@ -85,7 +90,7 @@ public partial class AddTraffiti : System.Web.UI.Page
 
         for (int i = 0; i < tempPhotoList.Count; i++)
         {
-            tempPhotoList[i].photo_path = "https://s3-ap-southeast-1.amazonaws.com/traffiti/" + tempPhotoList[i].photo_path;
+            tempPhotoList[i].photo_path = ConfigurationSettings.AppSettings["imageDomain"] + tempPhotoList[i].photo_path;
         }
 
         tempImageRepeater.DataSource = tempPhotoList;
@@ -94,12 +99,72 @@ public partial class AddTraffiti : System.Web.UI.Page
 
     protected void postBtn_Click(object sender, EventArgs e)
     {
-        //
-        ShowCurrentTemp();
-        for(int i =0; i < tempPhotoList.Count; i++)
-        { 
-            
+        try
+        {
+            if (Session["author_id"] == null)
+            {
+                content.Text = "Empty session";
+            }
+            else
+            {
+                ShowCurrentTemp();
+                ApiClass apiClass = new ApiClass();
+                string url = "http://api.traffiti.co/api/Wall/CreateWall";
+                ComingCreateWall ccw = new ComingCreateWall();
+                ccw.author_id = Convert.ToInt32(Session["author_id"]);
+                if (!string.IsNullOrEmpty(hiddenLocation.Value))
+                {
+                    ccw.location = hiddenLocation.Value;
+                }
+                else
+                {
+                    ccw.location = "";
+                }
+                if (!string.IsNullOrEmpty(lat.Value))
+                {
+                    ccw.lat = lat.Value;
+                }
+                else
+                {
+                    ccw.lat = "";
+                }
+                if (!string.IsNullOrEmpty(lat.Value))
+                {
+                    ccw.lon = lon.Value;
+                }
+                else
+                {
+                    ccw.lon = "";
+                }
+                ccw.message = content.Text;
+                ccw.photoList = new List<string>();
+                for (int i = 0; i < tempPhotoList.Count; i++)
+                {
+                    ccw.photoList.Add(tempPhotoList[i].photo_path);
+                }
+                ccw.publishList = new List<string>();
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                string json = js.Serialize(ccw);
+                string result = apiClass.PostCallApi(url, json);
+                ComingCreateWall afterCreateWall = js.Deserialize<ComingCreateWall>(result);
+
+
+                for (int i = 0; i < tempPhotoList.Count; i++)
+                {
+                    //copy photo
+                    WebClient WC = new WebClient();
+                    MemoryStream stream = new MemoryStream(WC.DownloadData(tempPhotoList[i].photo_path));
+                    UploadImageS3("client_upload/" + Session["author_id"] + "/" + afterCreateWall.publishList[i], stream);
+                }
+            }
+            //Response.Redirect("Recently.aspx");
         }
+        catch (Exception ex)
+        {
+            content.Text = ex.Message;
+        }
+
+        Response.Redirect("RecentlyList.aspx");
         //if (imagesUploader.HasFile)
         //{
         //    //client = new AmazonS3Client(Amazon.RegionEndpoint.APSoutheast1);

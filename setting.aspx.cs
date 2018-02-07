@@ -78,7 +78,16 @@ public partial class setting : System.Web.UI.Page
 
     protected void logoutBtn_Click(object sender, EventArgs e)
     {
-
+        Session["author_id"] = null;
+        HttpCookie myCookie = new HttpCookie("AccessKey");
+        //myCookie.Domain = "traffiti.co";
+        myCookie.Value = "";
+        //myCookie["accessKey"] = author.access_key;
+        myCookie.Expires = DateTime.Now.AddMonths(-1);
+        Response.Cookies.Add(myCookie);
+        Session["author_id"] = 0;
+        Response.Redirect("Login.aspx");
+        
     }
     protected void presetLang_SelectedIndexChanged(object sender, EventArgs e)
     {

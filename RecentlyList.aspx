@@ -10,7 +10,7 @@
     <asp:Repeater runat="server" ID="wallRepeater">
         <ItemTemplate>
             <div class ="row" >
-                <div class ="col-md-12" style="color:#fff;margin:10px;padding:10px;background-color: rgba(23, 32, 42, 0.8);">
+                <div class ="col-md-12" style="color:#fff;margin:10px;padding:10px;background-color: rgba(23, 32, 42, 0.8);max-width:98%">
                    <div class ="row" style="padding-bottom:5px;">
                        <div class ="col">
                           <img src='<%# DataBinder.Eval(Container.DataItem, "profile_pic") %>' class="rounded-circle" alt="profile_pic" width ="50"/> 
