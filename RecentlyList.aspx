@@ -1,7 +1,29 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="RecentlyList.aspx.cs" Inherits="RecentlyList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<script>
+    function addLike(wall_id)
+    {
+        $.ajax({
+            type: "POST",
+            url: 'RecentlyList.aspx/AddLike',
+            data: "{'wall_id':" + wall_id + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                $("#" + wall_id + "_like").html(msg.d);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
 
+    function addFav(wall_id)
+    {
+        alert(wall_id);
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
@@ -40,9 +62,13 @@
                     </div>
                     <div class ="row" style="padding-bottom:5px;">
                         <div class ="col-md-12">
-                            <span class="oi oi-thumb-up"></span> <%# DataBinder.Eval(Container.DataItem, "like_count") %>
+                            <a href ='javascript:addLike(<%# DataBinder.Eval(Container.DataItem, "wall_id") %>);' style ="color:#fff; text-decoration:none;">
+                                <span class="oi oi-thumb-up"></span> <span id ='<%# DataBinder.Eval(Container.DataItem, "wall_id") %>_like'><%# DataBinder.Eval(Container.DataItem, "like_count") %></span>
+                            </a>
                             &nbsp;
-                            <span class="oi oi-heart"></span> <%# DataBinder.Eval(Container.DataItem, "fav_count") %>
+                            <a href ='javascript:addFav(<%# DataBinder.Eval(Container.DataItem, "wall_id") %>);' style ="color:#fff; text-decoration:none;">
+                            <span class="oi oi-heart"></span> <span id ='<%# DataBinder.Eval(Container.DataItem, "fav_count") %>_fav'><%# DataBinder.Eval(Container.DataItem, "fav_count") %></span>
+                            </a>
                         </div>
                     </div>
                 </div>

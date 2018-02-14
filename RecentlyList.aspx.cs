@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
+using System.Web.Services;
 
 public partial class RecentlyList : System.Web.UI.Page
 {
@@ -32,5 +33,15 @@ public partial class RecentlyList : System.Web.UI.Page
         List<Wall> wallList = js.Deserialize <List<Wall>>(result);
         wallRepeater.DataSource = wallList;
         wallRepeater.DataBind();
+    }
+
+    [WebMethod]
+    public static string AddLike(int wall_id)
+    {
+        ApiClass apiClass = new ApiClass();
+        string url = "http://api.traffiti.co/api/Wall/AddLike";
+        string json = "{'wall_id': " + wall_id + "}";
+        string result = apiClass.PostCallApi(url, json);
+        return result;
     }
 }
